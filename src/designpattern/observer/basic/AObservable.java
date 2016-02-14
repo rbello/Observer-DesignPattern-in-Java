@@ -5,31 +5,31 @@ import java.util.List;
 
 public abstract class AObservable<T> implements IObservable<T> {
 
-	private List<IObserver<T>> listeners;
+	private List<IObserver<T>> _listeners;
 
 	public AObservable() {
-		this.listeners = new ArrayList<IObserver<T>>();
+		this._listeners = new ArrayList<IObserver<T>>();
 	}
 	
 	@Override
 	public void addListener(IObserver<T> observer) {
 		if (observer == null)
 			throw new NullPointerException();
-		if (this.listeners.contains(observer))
+		if (this._listeners.contains(observer))
 			throw new IllegalArgumentException();
-		this.listeners.add(observer);
+		this._listeners.add(observer);
 	}
 
 	@Override
 	public void removeListener(IObserver<T> observer) {
 		if (observer == null)
 			throw new NullPointerException();
-		this.listeners.remove(observer);
+		this._listeners.remove(observer);
 	}
 
 	@Override
 	public void notifyListeners(T event) {
-		this.listeners.forEach((listener) -> listener.onEvent(event));
+		this._listeners.forEach((listener) -> listener.onEvent(event));
 	}
 
 }

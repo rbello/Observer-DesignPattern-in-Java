@@ -2,6 +2,9 @@
 
 Cette implémentation très sommaire du design pattern correspond à sa définition stricte, tel qu'on la retrouve sur [wikipédia](https://fr.wikipedia.org/wiki/Observateur_%28patron_de_conception%29).
 
+**Modélisation**
+![Model](https://raw.githubusercontent.com/rbello/Observer-DesignPattern-in-Java/master/src/designpattern/observer/basic/Model.png)
+
 **Forces**
 - Très simple à implémenter, et à comprendre
 - Générique
