@@ -4,6 +4,10 @@ Une implémentation beaucoup plus évoluée, qui se base sur la réflexion.
 
 La méthode addListener() est remplacée par bind() dans cette implémentation.
 
+**Modélisation**
+
+![Model](https://raw.githubusercontent.com/rbello/Observer-DesignPattern-in-Java/master/src/designpattern/observer/dispatcher/Model.png)
+
 **Features**
 - Indice de priorité, pour ordonner la propagation aux listeners
 - Permet l'interruption de la propagation

@@ -12,7 +12,7 @@ package designpattern.observer.dispatcher;
 public interface IObservable<E> {
 	
 	public final int MIN_PRIORITY		= 0;
-	public final int LOW_PRIORITY		= 20;
+	public final int LOW_PRIORITY		= 50;
 	public final int DEFAULT_PRIORITY	= 100;
 	public final int HIGH_PRIORITY		= 400;
 	public final int MAX_PRIORITY		= 500;
