@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implémentation de la l'interface IObservable.
@@ -12,6 +14,8 @@ import java.util.TreeMap;
  * <E> Le type d'event
  */
 public class EventDispatcher<E> implements IEventDispatcher<E> {
+	
+	public static final Logger LOGGER = Logger.getLogger("Events");
 
 	/**
 	 * La liste des listeners.
@@ -90,11 +94,11 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			// Add observer
 			map.put(priority, new InterfaceTriggerable<E>(listener));
 			// Debug
-			/*if (LOGGER.isLoggable(IncaLogger.DEBUG)) {
-				LOGGER.log(IncaLogger.DEBUG, "BIND " + this.toString()
+			if (LOGGER.isLoggable(Level.FINEST)) {
+				LOGGER.log(Level.FINEST, "BIND " + this.toString()
 						+ ".bind('" + event + "', '" + listener + "', "
 						+ priority + ")");
-			}*/
+			}
 		}
 	}
 	
@@ -128,12 +132,12 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			// Add observer
 			map.put(priority, new MethodTriggerable<E>(listener, methodName));
 			// Debug
-			/*if (LOGGER.isLoggable(IncaLogger.DEBUG)) {
-				LOGGER.log(IncaLogger.DEBUG, "BIND "
+			if (LOGGER.isLoggable(Level.FINER)) {
+				LOGGER.log(Level.FINER, "BIND "
 						+ (_sender == null ? "?" : _sender.getClass().getSimpleName())
 						+ ".bind('" + event + "', '" + listener.getClass().getSimpleName() + "', "
 						+ priority + ")");
-			}*/
+			}
 		}
 		
 	}
@@ -161,15 +165,15 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 		}
 		
 		// Debug
-		/*if (LOGGER.isLoggable(IncaLogger.EVENT)) {
-			Level lvl = IncaLogger.EVENT;
+		if (LOGGER.isLoggable(Level.FINER)) {
+			Level lvl = Level.FINER;
 			StringBuilder sb = new StringBuilder();
 			sb.append("TRIGGER [");
 			sb.append(event);
 			sb.append("]");
 			sb.append(_sender == null ? "" : " SENDER=" + _sender.getClass().getSimpleName());
 			if (source != null && source != this) {
-				lvl = IncaLogger.EVENT_REDIRECT;
+				lvl = Level.FINEST;
 				sb.append(" ORIGINAL_SENDER=" + source);
 			}
 			sb.append(" ARGS=(");
@@ -189,7 +193,7 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			}
 			sb.append(")");
 			LOGGER.log(lvl, sb.toString());
-		}*/
+		}
 		
 		// On copie la liste des listeners en synchro
 		SortedMap<Integer, Triggerable<E>> map = null;
@@ -230,10 +234,10 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			}
 			
 			// Log
-			/*if (LOGGER.isLoggable(IncaLogger.EVENT)) {
-				LOGGER.log(IncaLogger.EVENT, "NOTIFY [" + event
+			if (LOGGER.isLoggable(Level.FINER)) {
+				LOGGER.log(Level.FINER, "NOTIFY [" + event
 						+ "] TARGET=" + listener + "()  PRIORITY=" + index);
-			}*/
+			}
 			
 			// Notify du listener
 			try {
@@ -250,13 +254,13 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			catch (Throwable ex) {
 				
 				// Debug
-				/*if (LOGGER.isLoggable(IncaLogger.ERROR)) {
-					LOGGER.log(IncaLogger.ERROR, "Exception on callback trigger "
+				if (LOGGER.isLoggable(Level.SEVERE)) {
+					LOGGER.log(Level.SEVERE, "Exception on callback trigger "
 							+ this.getClass().getCanonicalName() + ".trigger('"
 							+ event + "', '" + listener + "') : "
 							+ ex.getClass().getCanonicalName() + " - " + ex.getMessage());
 					ex.printStackTrace();
-				}*/
+				}
 				
 				// Si on stoppe la propagation
 				if (_exceptionRaiseStopPropagation) {
@@ -444,7 +448,7 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			java.lang.reflect.Method m = null;
 			
 			// Nombre de méthode ayant ce nom trouvées
-			//int count = 0;
+			int count = 0;
 			
 			// On parcours les méthodes de la classe du listener
 			for (java.lang.reflect.Method n : listener.getClass().getMethods()) {
@@ -453,7 +457,7 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 				if (!n.getName().equals(methodName)) continue;
 				
 				// On a trouvé une méthode avec le même nom
-				//count++;
+				count++;
 				
 				// Les classes des parametres de la méthode
 				Class<?>[] params = n.getParameterTypes();
@@ -474,7 +478,7 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 					// L'argument ne correspond pas à la classe du paramètre
 					if (!params[i].isInstance(args[i])) {
 
-						/*if (LOGGER.isLoggable(IncaLogger.DEBUG)) {
+						if (LOGGER.isLoggable(Level.FINER)) {
 							StringBuilder sb = new StringBuilder();
 							sb.append("Mismatch at argument ");
 							sb.append(i);
@@ -507,8 +511,8 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 								sb.append(e);
 								break;
 							}
-							LOGGER.log(IncaLogger.DEBUG, sb.toString());
-						}*/
+							LOGGER.log(Level.FINER, sb.toString());
+						}
 						
 						valid = false;
 						break;
@@ -549,7 +553,7 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 			
 			// Aucune callback trouvé
 			if (m == null) {
-				/*if (LOGGER.isLoggable(IncaLogger.ERROR)) {
+				if (LOGGER.isLoggable(Level.WARNING)) {
 					StringBuilder sb = new StringBuilder();
 					sb.append("Method ");
 					sb.append(methodName);
@@ -563,8 +567,8 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 					sb.append(" (found ");
 					sb.append(count);
 					sb.append(" method(s) with this name)");
-					LOGGER.log(IncaLogger.ERROR, sb.toString());
-				}*/
+					LOGGER.log(Level.WARNING, sb.toString());
+				}
 				// On laisse continuer la propagation.
 				return true;
 			}
@@ -636,14 +640,14 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 	public void redirect(IObservable<E> target) {
 		
 		// Log
-		/*if (LOGGER.isLoggable(IncaLogger.DEBUG)) {
+		if (LOGGER.isLoggable(Level.FINER)) {
 			if (target != null) {
-				LOGGER.log(IncaLogger.DEBUG, "REDIRECT " + this + " -> "+ target.events());
+				LOGGER.log(Level.FINER, "REDIRECT " + this + " -> "+ target.events());
 			}
 			else {
-				LOGGER.log(IncaLogger.DEBUG, "UNREDIRECT " + this);
+				LOGGER.log(Level.FINER, "UNREDIRECT " + this);
 			}
-		}*/
+		}
 		
 		// On enregistre la cible de la redirection
 		_redirect = target;
