@@ -32,6 +32,8 @@ public class Test {
 
 	public static void main(String[] args) throws InterruptedException {
 		
+		System.out.println("Implémentation : BASIC");
+		
 		Sensor s = new Sensor();
 		
 		s.addListener(new IObserver<Test.SensorData>() {
