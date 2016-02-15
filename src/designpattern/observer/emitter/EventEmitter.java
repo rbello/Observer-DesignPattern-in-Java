@@ -48,4 +48,9 @@ public class EventEmitter<E> implements IEventEmitter<E> {
 		return list;
 	}
 
+	@Override
+	public int getListenersCount() {
+		return _listeners.size();
+	}
+
 }

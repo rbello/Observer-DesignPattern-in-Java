@@ -658,5 +658,14 @@ public class EventDispatcher<E> implements IEventDispatcher<E> {
 		return "EventDispatcher["
 			+ (_sender == null ? "?" : _sender.getClass().getSimpleName()) + "]";
 	}
+
+	@Override
+	public int getObserversCount() {
+		int count = 0;
+		for (Object event : _eventsListeners.keySet()) {
+			count =+ _eventsListeners.get(event).size();
+		}
+		return count;
+	}
 	
 }

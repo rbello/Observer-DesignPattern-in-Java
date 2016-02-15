@@ -8,11 +8,9 @@ import java.util.logging.Logger;
 import designpattern.observer.dispatcher.IListener;
 
 /**
- * TODO
- *
  * @param <L> L'interface des listeners pour cette source.
  */
-public /*abstract*/ class EventSource<L extends IEventListener> {
+public class EventSource<L extends IEventListener> {
 	
 	/**
 	 * Logger
@@ -32,7 +30,7 @@ public /*abstract*/ class EventSource<L extends IEventListener> {
 	private EventSource<SourceListener> _sourceEvents;
 
 	/**
-	 * L'objet qui envoie les messages. Les sources sont destinées à Ãªtre
+	 * L'objet qui envoie les messages. Les sources sont destinées à être
 	 * utilisées en créant des attributs membres, on stockera ici l'instance
 	 * de l'objet qui a les attributs.  
 	 */
@@ -52,7 +50,7 @@ public /*abstract*/ class EventSource<L extends IEventListener> {
 		this(IAnonymousListener.class, null);
 	}
 	
-	public EventSource(Class</*L*/? extends IEventListener> listenerClass) {
+	public EventSource(Class<? extends IEventListener> listenerClass) {
 		this(listenerClass, null);
 	}
 	
@@ -65,9 +63,9 @@ public /*abstract*/ class EventSource<L extends IEventListener> {
 	 * 
 	 * @param sender L'envoyeur des messages, l'objet qui a la source. 
 	 */
-	public EventSource(Class</*L*/? extends IEventListener> listenerClass, Object sender) {
+	public EventSource(Class<? extends IEventListener> listenerClass, Object sender) {
 		
-		// On ajoute une source pour pouvoir Ãªtre informé des évolutions de cette
+		// On ajoute une source pour pouvoir être informé des évolutions de cette
 		// source, avec un controle de redondance cyclique.
 		if (sender != null && !(sender instanceof EventSource)) {
 			_sourceEvents = new EventSource<SourceListener>(this) {
@@ -90,7 +88,7 @@ public /*abstract*/ class EventSource<L extends IEventListener> {
 	 * 
 	 * @return L'interface des listeners de la source, le type paramètré L.
 	 */
-	public Class</*L*/? extends IEventListener> getListenerClass() {
+	public Class<? extends IEventListener> getListenerClass() {
 		return _listenerClass;
 	}
 	
@@ -259,7 +257,7 @@ public /*abstract*/ class EventSource<L extends IEventListener> {
 	}
 	
 	/**
-	 * Associer un IListener ï¿½ un event en particulier.
+	 * Associer un IListener à un event en particulier.
 	 * 
 	 * @param eventName Le nom de l'event.
 	 * @param listener L'instance du listener.

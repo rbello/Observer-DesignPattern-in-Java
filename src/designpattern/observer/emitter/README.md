@@ -12,3 +12,4 @@ Une implémentation inspirée du C#, où les événements sont des propriétés.
 **Faiblesses**
 - Les événements d'un objet ne peuvent être déclarés dans son interface
 - Performance (utilisation de la reflexion si on utilise les annotations)
+- On ne peut plus unsubsribe les pointeurs sur méthode

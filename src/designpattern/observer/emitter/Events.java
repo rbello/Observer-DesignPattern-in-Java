@@ -101,6 +101,10 @@ public class Events {
 		
 	}
 	
+	public static void bind(IEventEmitter<?> emitter, Object listener, ErrorHandler handler) {
+		// TODO
+	}
+	
 	/**
 	 * Retire les listeners donnés des 
 	 * 

@@ -84,5 +84,10 @@ public interface IEventDispatcher<E> extends IObservable<E> {
 	 * Supprimer cet objet et libérer la mémoire.
 	 */
 	public void dispose();
+
+	/**
+	 * Compte le nombre de listeners dans ce dispatcher.
+	 */
+	public int getObserversCount();
 	
 }

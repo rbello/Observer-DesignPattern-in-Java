@@ -16,4 +16,6 @@ public interface IEventEmitter<E> {
 
 	boolean hasListeners();
 
+	int getListenersCount();
+
 }
