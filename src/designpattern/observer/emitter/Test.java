@@ -67,7 +67,12 @@ public class Test {
 		AnnotedObserver o2 = new AnnotedObserver();
 		Events.bind(s, o2);
 		
-		Events.unbind(o1, o2);
+		// Ne fonctionne pas
+		//s.OnHumidityChanged.remove(o1::onHumidityChanged);
+		//s.OnHumidityChanged.remove(o1::onTemperatureChanged);
+		
+		// Unbind
+		//Events.unbind(s, o1, o2);
 		
 		while (true) {
 			

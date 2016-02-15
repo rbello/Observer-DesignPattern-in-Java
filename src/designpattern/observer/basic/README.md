@@ -9,6 +9,7 @@ Cette implémentation très sommaire du design pattern correspond à sa définition 
 **Forces**
 - Très simple à implémenter, et à comprendre
 - Générique
+- L'interface est claire, les objets observables sont clairements affichés
 
 **Faiblesses**
 - Les interfaces ne peuvent être implémentées qu'une fois chacune, donc une classe ne peut pas émettre plusieurs events

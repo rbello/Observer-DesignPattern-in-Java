@@ -16,3 +16,8 @@ Une version beaucoup plus évoluée, qui supporte la priorisation des listeners, l
 
 Une implémentation plus complexe et complète, qui supporte l'asynchrone.
 [Voir le code](https://github.com/rbello/Observer-DesignPattern-in-Java/tree/master/src/designpattern/observer/source)
+
+### Implémentation Emitter
+
+Une implémentation plus dans le style du C#, qui supporte également les annotations.
+[Voir le code](https://github.com/rbello/Observer-DesignPattern-in-Java/tree/master/src/designpattern/observer/emitter)

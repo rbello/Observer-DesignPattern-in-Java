@@ -18,6 +18,7 @@ La méthode addListener() est remplacée par bind() dans cette implémentation.
 - Relativement simple à comprendre
 - Encapsulée : la classe EventDispatcher implémente la logique de broadcast, pas besoin de l'implémenter
 - Plus obligé d'implémenter une interface pour devenir listener, une même classe peut donc être listener de plusieurs events
+- Les événements observables peuvent être déclarés dans les interfaces des objets
 - Générique
 
 **Faiblesses**
