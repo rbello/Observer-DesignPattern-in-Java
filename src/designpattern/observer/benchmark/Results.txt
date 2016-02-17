@@ -1,0 +1,8 @@
+Started: designpattern.observer.benchmark.ImplBasic with 4 observers
+Duration : 0.023610599
+Started: designpattern.observer.benchmark.ImplDispatcher with 4 observers
+Duration : 0.26167903
+Started: designpattern.observer.benchmark.ImplEmitter with 4 observers
+Duration : 0.069112819
+Started: designpattern.observer.benchmark.ImplEmitter2 with 4 observers
+Duration : 0.019501832
